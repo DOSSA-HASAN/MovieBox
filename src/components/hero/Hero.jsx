@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./hero.scss"
 import Navbar from "../navbar/Navbar"
 
@@ -15,13 +15,13 @@ function Hero() {
             "name": "John Wick 2 : Parabellum",
             "rating": "86.0 / 100",
             "desc": "John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.",
-            "image": "/poster.jpg"
+            "image": "/poster02.jpg"
         },
         {
             "name": "John Wick 3 : Parabellum",
             "rating": "86.0 / 100",
             "desc": "John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.",
-            "image": "/poster.jpg"
+            "image": "/poster03.jpg"
         },
         {
             "name": "John Wick 4 : Parabellum",
@@ -33,12 +33,22 @@ function Hero() {
             "name": "John Wick 5 : Parabellum",
             "rating": "86.0 / 100",
             "desc": "John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.",
-            "image": "/poster.jpg"
+            "image": "/poster02.jpg"
         }
     ]
 
     const [posterNum, setPosterNum] = useState(0)
-    console.log(posterNum)
+
+    //auto-scroll function
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setPosterNum(prev => (prev + 1) % movies.length)
+    //     }, 5000);
+
+    //     return () => clearInterval(interval)
+
+    // }, [movies.length])
+
 
     return (
         <section className='hero-section'>
