@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./genre.scss"
+import Swal from "sweetalert2"
 
 function Genre() {
 
@@ -59,28 +60,37 @@ function Genre() {
         const isDuplicate = selectedGenres.filter(genre => genre.id == genreId)
 
         //check if no duplicate found
-        if(isDuplicate.length == 0){
-            //add to selectedGenres 
-            const addToSelected = movieGenres.filter(movie => (movie.id == genreId))
-            setSelectedGenres(prev => [...prev, ...addToSelected])
-            //remove from movieGenres
-            const filteredMoviesGenre = movieGenres.filter(movie => (movie.id !== genreId))
-            setMovieGenres(filteredMoviesGenre)
-        } 
-        else{
+        if (isDuplicate.length == 0) {
+            if (selectedGenres.length < 3) {
+                //add to selectedGenres 
+                const addToSelected = movieGenres.filter(movie => (movie.id == genreId))
+                setSelectedGenres(prev => [...prev, ...addToSelected])
+                //remove from movieGenres
+                const filteredMoviesGenre = movieGenres.filter(movie => (movie.id !== genreId))
+                setMovieGenres(filteredMoviesGenre)
+            }
+            else {
+                Swal.fire({
+                    // title: 'Responsive Alert!',
+                    text: 'Max limit reached, can not add more to selection',
+                    icon: 'warning',
+                    confirmButtonText: 'Okay',
+                })
+            }
+        }
+        else {
             // if a duplicate was found
             //remove it from the selectedGenres
             const filteredSelected = selectedGenres.filter(genre => genre.id !== genreId)
             setSelectedGenres(filteredSelected)
             //add it to moviesGenre
-            const addToMovies = selectedGenres.filter(genre =>  genre.id == genreId)
+            const addToMovies = selectedGenres.filter(genre => genre.id == genreId)
             setMovieGenres(prev => [...prev, ...addToMovies])
         }
-
     }
 
-        console.log("movie genre",movieGenres)
-        console.log("selected genres" , selectedGenres)
+    console.log("movie genre", movieGenres)
+    console.log("selected genres", selectedGenres)
 
 
     return (
@@ -89,13 +99,15 @@ function Genre() {
             <main className="genres-selection-cont">
                 {
                     mappingGenres.map((genre, index) => (
-                        <div onClick={() => handleAddGenre(genre.id)} key={index} className="genre">
+                        <div onClick={() => handleAddGenre(genre.id)} key={index}
+                            className={selectedGenres.some((selected) => selected.id == genre.id) ? "selected genre" : "genre"}>
                             <p>{genre.name}</p>
                         </div>
                     ))
                 }
             </main>
-        </section>
+            <div className="overlay"></div>
+        </section >
     )
 }
 
