@@ -90,4 +90,25 @@
             cursor: not-allowed;
         }
     }
+
+    button{
+        padding: 20px;
+        margin: 20px 0;
+        width: 50%;
+        border-radius: 10px;
+        background-color: hsla(111, 52%, 47%, 0.6);
+        color: #fff;
+        font-size: 20px;
+        font-weight: 500;
+        text-align: center;
+        border: none;
+
+        &:hover{
+            cursor: pointer;
+        }
+
+        @include md{
+            width: 200px;
+        }
+    }
 }
