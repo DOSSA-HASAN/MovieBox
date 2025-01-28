@@ -39,18 +39,31 @@
     }
 
     .genres-selection-cont {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 20px;
-        width: 80%;
-        border-radius: 10px;
-        height: 40%;
+        width: 100%;
 
-        @include tab {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        .movie-genre,
+        .tv-shows-genre {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             width: 100%;
+
+            .genres {
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+                justify-content: center;
+                align-items: center;
+
+                @include md {
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                }
+            }
         }
 
         .genre {
@@ -68,34 +81,13 @@
             }
         }
 
-        .selected{
+        .selected {
             background-color: hsla(120, 3%, 12%, 0.4);
             color: #fff;
         }
 
-        .disabled:hover{
+        .disabled:hover {
             cursor: not-allowed;
-        }
-    }
-    
-    .error-cont{
-        color: #fff;
-        background-color: hsl(0, 100%, 50%, 0.7);
-        padding: 20px;
-        border-radius: 10px;
-        font-size: 30px;
-        font-weight: 500;
-        position: absolute;
-        top: 50%;
-        // bottom: 0;
-        transform: translateY(-50%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        p{
-            margin: 0 10px;
-            text-align: center;
         }
     }
 }
