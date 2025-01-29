@@ -27,7 +27,8 @@ function InnerComponent() {
   return (
     <>
       {
-      !hasSelected ? <Genre /> : <Hero />
+      // !hasSelected ? <Genre /> : <Hero />
+      <Hero />
       }
     </>
   )

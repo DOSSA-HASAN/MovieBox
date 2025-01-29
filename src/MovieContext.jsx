@@ -155,9 +155,13 @@ function MovieContext({ children }) {
 
     const [hasSelected, setHasSelected] = useState(false)
 
-    const fetchMovies = async () => {
+
+    //used for the banner in Hero.jsx
+    const [movies, setMovies] = useState([])
+
+    const fetchTrendingMovies = async () => {
         const response = await fetch(
-            "https://api.trakt.tv/movies/trending",
+            "https://api.trakt.tv/movies/trending?extended=images",
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -166,15 +170,19 @@ function MovieContext({ children }) {
                 }
             }
         );
+
         const data = await response.json();
-        console.log(data);
+        console.log(data)
+        setMovies(data)
+
     };
 
-    fetchMovies();
+    fetchTrendingMovies();
+
 
 
     return (
-        <mContext.Provider value={{ movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected }}>
+        <mContext.Provider value={{ movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected, movies }}>
             {children}
         </mContext.Provider>
     )
