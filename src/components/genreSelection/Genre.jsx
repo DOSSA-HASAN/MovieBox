@@ -36,7 +36,7 @@ function Genre() {
                     </div>
                 </article>
                 <article className="tv-shows-genre">
-                    <h1>Select Your Movie Genres</h1>
+                    <h1>Select Your TV Show Genres</h1>
                     <div className="genres">
                         {
                             tvMappingGenres.map((genre, index) => (

@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react'
 import Swal from "sweetalert2"
+import { CLIENT_ID_TRAKT } from "../key"
 
 const mContext = createContext()
 
@@ -153,6 +154,23 @@ function MovieContext({ children }) {
     }
 
     const [hasSelected, setHasSelected] = useState(false)
+
+    const fetchMovies = async () => {
+        const response = await fetch(
+            "https://api.trakt.tv/movies/trending",
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "trakt-api-version": "2",
+                    "trakt-api-key": CLIENT_ID_TRAKT
+                }
+            }
+        );
+        const data = await response.json();
+        console.log(data);
+    };
+
+    fetchMovies();
 
 
     return (
