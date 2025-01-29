@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Hero from "./components/hero/Hero"
-import Genre from "./components/hero/genreSelection/Genre"
+import Genre from "./components/genreSelection/Genre"
 import { MovieContext, mContext } from './MovieContext'
 import { useContext } from "react"
 

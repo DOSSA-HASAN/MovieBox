@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import "./navbar.scss"
 import { Link } from "react-router-dom"
+import { mContext } from '../../MovieContext'
 
 function Navbar() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const { setHasSelected, hasSelected } = useContext(mContext)
+
+
 
     return (
         <nav>
@@ -25,6 +29,7 @@ function Navbar() {
                 <Link to={"/"}><p>Preferences</p></Link>
                 <Link to={"/"}><p>Contact Us</p></Link>
                 <Link to={"/"}><p>About Us</p></Link>
+                <p onClick={() => setHasSelected(!hasSelected)}>Re-select Genres</p>
             </div>
         </nav>
     )

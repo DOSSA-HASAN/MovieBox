@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import "./genre.scss"
-import { mContext } from '../../../MovieContext'
+import { mContext } from '../../MovieContext'
 import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom"
 
 function Genre() {
 
     const { movieMappingGenres, tvMappingGenres, selectedMovieGenres, selectedTvGenres, handleAddMovieGenre, handleAddTvGenre, setHasSelected, hasSelected} = useContext(mContext)
 
     const continueAndNavigate = () => {
-        if(selectedMovieGenres.length == 0 || selectedTvGenres.lenght == 0){
+        if(selectedMovieGenres.length === 0 || selectedTvGenres.length === 0){
             Swal.fire({
                 text: "Select a couple of genres to procees",
                 icon: "info",
@@ -17,8 +16,6 @@ function Genre() {
             })
         } else{
             setHasSelected(!hasSelected)
-            // const navigate = useNavigate();
-            // navigate("/")
         }
     }
 
