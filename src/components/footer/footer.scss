@@ -1,0 +1,48 @@
+@import "../../responsive.scss";
+
+.footer-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    margin: 20px 0;
+
+    .socials-cont{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img{
+            width: 24px;
+            margin: 0 10px;
+        }
+    }
+
+    .extra-links-cont{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+
+        a{
+            color: #000;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: 500;
+
+            @include md{
+                margin: 10px 0;
+            }
+        }
+
+        @include md{
+            flex-direction: column;
+        }
+    }
+
+    &:last-child{
+        color: hsl(0, 0%, 0%, 0.5);
+        font-weight: 500;
+    }
+}

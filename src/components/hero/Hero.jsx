@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./hero.scss"
 import Navbar from "../navbar/Navbar"
+import Footer from '../footer/Footer'
 
 function Hero() {
 
@@ -51,6 +52,7 @@ function Hero() {
 
 
     return (
+        <>
         <section className='hero-section'>
             <main className="slider-cont">
                 <Navbar />
@@ -85,6 +87,8 @@ function Hero() {
                 }
             </main>
         </section>
+        <Footer />
+        </>
     )
 }
 

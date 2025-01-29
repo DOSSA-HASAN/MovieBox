@@ -154,8 +154,9 @@ function MovieContext({ children }) {
 
     const [hasSelected, setHasSelected] = useState(false)
 
+
     return (
-        <mContext.Provider value={{movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected}}>
+        <mContext.Provider value={{ movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected }}>
             {children}
         </mContext.Provider>
     )
