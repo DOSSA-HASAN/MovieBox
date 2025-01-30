@@ -161,7 +161,7 @@ function MovieContext({ children }) {
 
     const fetchTrendingMovies = async () => {
         const response = await fetch(
-            "https://api.trakt.tv/movies/trending?extended=images",
+            "https://api.trakt.tv/movies/trending?extended=full,images",
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -178,6 +178,29 @@ function MovieContext({ children }) {
     };
 
     fetchTrendingMovies();
+
+    //genres params used in 'fetchWithGenres' funtion below
+    const genreParams = new URLSearchParams({
+        genres: selectedMovieGenres
+    })
+
+    console.log(genreParams.toString())
+
+    const fetchWithGenres = async () => {
+
+        if (selectedMovieGenres) {
+            const response = await fetch(
+                "",
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "trakt-api-version": "2",
+                        "trakt-api-key": CLIENT_ID_TRAKT
+                    }
+                }
+            )
+        }
+    }
 
 
 
