@@ -8,7 +8,7 @@ import Suggestion from '../suggestion/Suggestion'
 
 function Hero() {
 
-    const { movies, fetchedMoviesWithGenres } = useContext(mContext)
+    const { movies, fetchedMoviesWithGenres, fetchedShowsWithGenres } = useContext(mContext)
     // console.log(movies)
 
     const [posterNum, setPosterNum] = useState(0)
@@ -74,8 +74,9 @@ function Hero() {
                     }
                 </main>
             </section >
+            <Suggestion data={fetchedShowsWithGenres} />
+            <Suggestion data={fetchedMoviesWithGenres} />
             <Footer />
-        <Suggestion data={fetchedMoviesWithGenres} />
 
         </>
     )

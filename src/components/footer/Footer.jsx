@@ -16,7 +16,7 @@ function Footer() {
                 <Link><p>Privacy & Policy</p></Link>
                 <Link><p>Press Room</p></Link>
             </div>
-            <p>&copy; 2021 MovieBox by Adriana Eka Prayudha  </p>
+            <p>&copy; 2025 MovieBox by Dossa Hasan</p>
         </footer>
     )
 }

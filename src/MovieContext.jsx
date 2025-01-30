@@ -180,15 +180,15 @@ function MovieContext({ children }) {
 
     //genres params used in 'fetchMoviesWithGenres' funtion below
 
-    const [page, setPage] = useState(1)
+    const [pageM, setPageM] = useState(1)
 
     //array of movies suggested for users based on their selected genres
     const [fetchedMoviesWithGenres, setFetchedMoviesWithGenres] = useState([])
 
-    const genreParams = new URLSearchParams({
+    const genreParamsMovie = new URLSearchParams({
         genres: "action",
         extended: "full,images",
-        page: page,
+        page: pageM,
         limit: 20
     })
 
@@ -196,7 +196,7 @@ function MovieContext({ children }) {
 
         if (selectedMovieGenres) {
             const response = await fetch(
-                `https://api.trakt.tv/movies/trending?&${genreParams}`,
+                `https://api.trakt.tv/movies/trending?&${genreParamsMovie}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -206,22 +206,61 @@ function MovieContext({ children }) {
                 }
             )
             const data = await response.json()
-            console.log("with genres",data)
-            setFetchedMoviesWithGenres(prev => [...prev, ...data])
-            setPage(prev => (prev + 1))
+            console.log("with genres", data)
+            setFetchedMoviesWithGenres(prev => {
+                const newMovies = data.filter(movie => !prev.some(prevMovie => prevMovie.movie.ids.trakt === movie.movie.ids.trakt))
+                return [...prev, ...newMovies]
+            })
+            setPageM(prev => (prev + 1))
         }
     }
 
-    //called on startup of application
+    //array of movies suggested for users based on their selected genres
+    const [fetchedShowsWithGenres, setFetchedShowsWithGenres] = useState([])
+
+    const [pageS, setPageS] = useState(1)
+
+    const genreParamsShows = new URLSearchParams({
+        genres: "action",
+        extended: "full,images",
+        page: pageS,
+        limit: 20
+    })
+
+    const fetchShowsWithGenres = async () => {
+
+        if (selectedMovieGenres) {
+            const response = await fetch(
+                `https://api.trakt.tv/shows/trending?&${genreParamsShows}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "trakt-api-version": "2",
+                        "trakt-api-key": CLIENT_ID_TRAKT
+                    }
+                }
+            )
+            const data = await response.json()
+            console.log("with genres shows", data)
+            setFetchedShowsWithGenres(prev => {
+                const newShows = data.filter(shows => !prev.some(prevShow => prevShow.show.ids.trakt === shows.show.ids.trakt))
+                return [...prev, ...newShows]
+            })
+            setPageS(prev => (prev + 1))
+        }
+    }
+
+    // called on startup of application
     useEffect(() => {
         fetchTrendingMovies();
         fetchMoviesWithGenres()
+        fetchShowsWithGenres()
     }, [])
 
 
 
     return (
-        <mContext.Provider value={{ movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected, movies, fetchedMoviesWithGenres }}>
+        <mContext.Provider value={{ movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected, movies, fetchedMoviesWithGenres, fetchedShowsWithGenres }}>
             {children}
         </mContext.Provider>
     )
