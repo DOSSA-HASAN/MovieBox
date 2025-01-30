@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import Swal from "sweetalert2"
 import { CLIENT_ID_TRAKT } from "../key"
 
@@ -173,24 +173,30 @@ function MovieContext({ children }) {
 
         const data = await response.json();
         console.log(data)
+        console.log(Date.now())
         setMovies(data)
 
     };
 
-    fetchTrendingMovies();
+    //genres params used in 'fetchMoviesWithGenres' funtion below
 
-    //genres params used in 'fetchWithGenres' funtion below
+    const [page, setPage] = useState(1)
+
+    //array of movies suggested for users based on their selected genres
+    const [fetchedMoviesWithGenres, setFetchedMoviesWithGenres] = useState([])
+
     const genreParams = new URLSearchParams({
-        genres: selectedMovieGenres
+        genres: "action",
+        extended: "full,images",
+        page: page,
+        limit: 20
     })
 
-    console.log(genreParams.toString())
-
-    const fetchWithGenres = async () => {
+    const fetchMoviesWithGenres = async () => {
 
         if (selectedMovieGenres) {
             const response = await fetch(
-                "",
+                `https://api.trakt.tv/movies/trending?&${genreParams}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -199,13 +205,23 @@ function MovieContext({ children }) {
                     }
                 }
             )
+            const data = await response.json()
+            console.log("with genres",data)
+            setFetchedMoviesWithGenres(prev => [...prev, ...data])
+            setPage(prev => (prev + 1))
         }
     }
+
+    //called on startup of application
+    useEffect(() => {
+        fetchTrendingMovies();
+        fetchMoviesWithGenres()
+    }, [])
 
 
 
     return (
-        <mContext.Provider value={{ movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected, movies }}>
+        <mContext.Provider value={{ movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected, movies, fetchedMoviesWithGenres }}>
             {children}
         </mContext.Provider>
     )

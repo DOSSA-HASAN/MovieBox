@@ -3,6 +3,7 @@ import Hero from "./components/hero/Hero"
 import Genre from "./components/genreSelection/Genre"
 import { MovieContext, mContext } from './MovieContext'
 import { useContext } from "react"
+import Suggestion from "./components/suggestion/Suggestion"
 
 
 function App() {
@@ -22,14 +23,14 @@ function App() {
 
 function InnerComponent() {
 
-  const { setHasSelected, hasSelected } = useContext(mContext)
+  const { setHasSelected, hasSelected, fetchedMoviesWithGenres } = useContext(mContext)
 
   return (
     <>
       {
-      // !hasSelected ? <Genre /> : <Hero />
-      <Hero />
+        // !hasSelected ? <Genre /> : <Hero />
       }
+      <Hero />
     </>
   )
 }

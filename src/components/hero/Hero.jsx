@@ -4,10 +4,11 @@ import Navbar from "../navbar/Navbar"
 import Footer from '../footer/Footer'
 import { mContext } from '../../MovieContext'
 import { Link } from "react-router-dom"
+import Suggestion from '../suggestion/Suggestion'
 
 function Hero() {
 
-    const { movies } = useContext(mContext)
+    const { movies, fetchedMoviesWithGenres } = useContext(mContext)
     // console.log(movies)
 
     const [posterNum, setPosterNum] = useState(0)
@@ -74,6 +75,8 @@ function Hero() {
                 </main>
             </section >
             <Footer />
+        <Suggestion data={fetchedMoviesWithGenres} />
+
         </>
     )
 }
