@@ -3,6 +3,7 @@ import "./hero.scss"
 import Navbar from "../navbar/Navbar"
 import Footer from '../footer/Footer'
 import { mContext } from '../../MovieContext'
+import { Link } from "react-router-dom"
 
 function Hero() {
 
@@ -32,10 +33,10 @@ function Hero() {
                             <figure className='poster' key={index} style={{
                                 backgroundImage: `url(
                                     ${movie.movie.images.clearart[0] ?
-                                    `https://${movie.movie.images.clearart[0]}`:
-                                    `https://${movie.movie.images.thumb[0]}` ?
-                                    `https://${movie.movie.images.fanart[0]}` :
-                                    "/default.jpeg"
+                                        `https://${movie.movie.images.clearart[0]}` :
+                                        `https://${movie.movie.images.thumb[0]}` ?
+                                            `https://${movie.movie.images.fanart[0]}` :
+                                            "/default.jpeg"
                                     }
                                 )`
 
@@ -45,13 +46,16 @@ function Hero() {
                                     <h1>{movie.movie.title}</h1>
                                     <span className="rating-cont">
                                         <img src="/imdb.png" alt="" />
-                                        <p>{movie.movie.ids.imdb}</p>
+                                        <p>{movie.movie.rating.toFixed(1)}</p>
                                     </span>
-                                    <p>{movie.desc}</p>
-                                    <button className='trailer-btn'>
-                                        <img src="/trailer.png" alt="" />
-                                        Watch trailer
-                                    </button>
+                                    <p>{movie.movie.overview}</p>
+                                    <Link className='trailer-link' to={movie.movie.trailer} target='_blank'>
+                                        <button className='trailer-btn'>
+                                            <img src="/trailer.png" alt="" />
+                                            Watch trailer
+                                        </button>
+                                    </Link>
+
                                 </div>
                                 <article className='slider-controls'>
                                     {

@@ -31,6 +31,7 @@
             @include md {
                 padding: 20px;
                 flex-direction: column;
+                background-size: auto;
             }
 
             .overlay {
@@ -78,38 +79,45 @@
 
                 p {
                     width: 400px;
-
+                    
                     @include md {
                         width: 100%;
                     }
                 }
 
-                .trailer-btn {
-                    background-color: #BE123C;
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    border: none;
-                    border-radius: 10px;
-                    color: #fff;
-                    font-weight: 600;
-                    padding: 5px 10px;
-                    width: 170px;
-                    margin-top: 20px;
+                .trailer-link {
+                    text-decoration: none;
 
-                    img {
-                        margin-right: 20px;
+                    .trailer-btn {
+                        background-color: #BE123C;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        border: none;
+                        border-radius: 10px;
+                        color: #fff;
+                        font-weight: 600;
+                        padding: 5px 10px;
+                        width: 170px;
+                        margin-top: 20px;
+
+                        img {
+                            margin-right: 20px;
+                        }
                     }
                 }
+
             }
 
             .slider-controls {
                 z-index: 100;
+
                 @include md {
                     margin-top: 50px;
                     display: flex;
                 }
-                .number{
+
+                .number {
                     width: 30px;
                     display: flex;
                     justify-content: space-between;
@@ -119,11 +127,11 @@
                         flex-direction: column;
                     }
 
-                    p:hover{
+                    p:hover {
                         cursor: pointer;
                     }
 
-                    .line{
+                    .line {
                         width: 15px;
                         height: 2px;
                         background-color: #fff;
