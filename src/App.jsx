@@ -4,6 +4,7 @@ import Genre from "./components/genreSelection/Genre"
 import { MovieContext, mContext } from './MovieContext'
 import { useContext } from "react"
 import Suggestion from "./components/suggestion/Suggestion"
+import Page from "./components/page/Page"
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
           { }
           <Routes>
             <Route path="/" element={<InnerComponent />} />
+            <Route path="/movie/:id" element={<Page />} />
+            <Route path="/show/:id" element={<Page />} />
           </Routes>
         </BrowserRouter>
       </MovieContext>

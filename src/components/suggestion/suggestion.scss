@@ -35,6 +35,11 @@
             overflow-x: hidden;
             margin-top: 30px;
 
+            a{
+                text-decoration: none;
+                color: #000;
+            }
+
             &::-webkit-scrollbar {
                 background-color: #9CA3AF;
                 border-radius: 10px;

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { mContext } from '../../movieContext'
 import "./suggestion.scss"
+import { Link } from 'react-router-dom'
 
 function Suggestion({ data, type }) {
 
@@ -36,11 +37,11 @@ function Suggestion({ data, type }) {
             //scrollHeight = total scrollable height
             const { scrollTop, scrollHeight, clientHeight } = element
 
-            if(scrollTop + clientHeight > scrollHeight - 1){
-                if(type == "movie"){
+            if (scrollTop + clientHeight > scrollHeight - 1) {
+                if (type == "movie") {
                     fetchMoviesWithGenres()
                 }
-                if(type == "show"){
+                if (type == "show") {
                     fetchShowsWithGenres()
                 }
             }
@@ -62,18 +63,20 @@ function Suggestion({ data, type }) {
                         {
                             <figure ref={scrollRef} onScroll={handleScroll} className={showMoreShows ? "suggestions-slider show-more" : "suggestions-slider"}>
                                 {data && data.map((show, index) => (
-                                    <div key={index} className="suggested-movie" style={{ transform: `translateX(-${currentCount * 200}px)` }}>
-                                        <img src={show?.show?.images?.poster?.[0] ? `https://${show.show.images.poster[0]}` : "/fallback-image.jpg"} alt="Show Poster" />
-                                        <p className='country-released'>{show?.show?.country?.toUpperCase()} {show?.show?.year}</p>
-                                        <p className='title'>{show?.show?.title}</p>
-                                        <span className="rating">
-                                            <img src="/imdb.png" alt="IMDb Rating" />
-                                            <p>{show?.show?.rating ? show.show.rating.toFixed(1) : "N/A"}</p>
-                                        </span>
-                                        <div className='genres-list'>
-                                            <p>{show?.show?.show?.toString() || "Unknown Genre"}</p>
+                                    <Link to={`/show/${show.show.ids.trakt}`}>
+                                        <div key={index} className="suggested-movie" style={{ transform: `translateX(-${currentCount * 200}px)` }}>
+                                            <img src={show?.show?.images?.poster?.[0] ? `https://${show.show.images.poster[0]}` : "/fallback-image.jpg"} alt="Show Poster" />
+                                            <p className='country-released'>{show?.show?.country?.toUpperCase()} {show?.show?.year}</p>
+                                            <p className='title'>{show?.show?.title}</p>
+                                            <span className="rating">
+                                                <img src="/imdb.png" alt="IMDb Rating" />
+                                                <p>{show?.show?.rating ? show.show.rating.toFixed(1) : "N/A"}</p>
+                                            </span>
+                                            <div className='genres-list'>
+                                                <p>{show?.show?.show?.toString() || "Unknown Genre"}</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 ))}
                             </figure>
                         }
@@ -89,6 +92,7 @@ function Suggestion({ data, type }) {
                         {
                             <figure ref={scrollRef} onScroll={handleScroll} className={showMoreMovies ? "suggestions-slider show-more" : "suggestions-slider"}>
                                 {data && data.map((movie, index) => (
+                                    <Link to={`/movie/${movie.movie.ids.trakt}`}>
                                     <div key={index} className="suggested-movie" style={{ transform: `translateX(-${currentCount * 200}px)` }}>
                                         <img src={movie?.movie?.images?.poster?.[0] ? `https://${movie.movie.images.poster[0]}` : "/fallback-image.jpg"} alt="Movie Poster" />
                                         <p className='country-released'>{movie?.movie?.country?.toUpperCase()} {movie?.movie?.year}</p>
@@ -101,10 +105,11 @@ function Suggestion({ data, type }) {
                                             <p>{movie?.movie?.genres?.toString() || "Unknown Genre"}</p>
                                         </div>
                                     </div>
+                                    </Link>
                                 ))}
-                            </figure>
-                        }
-                    </main >
+                    </figure>
+            }
+        </main >
             }
         </section >
     )
