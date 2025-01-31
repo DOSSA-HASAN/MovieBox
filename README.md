@@ -1,8 +1,18 @@
-# React + Vite
+# MovieBox 🎬
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A movie and TV show discovery app built with React, Trakt API, and Vite. Users can browse trending movies and TV shows, filter by genres, and explore detailed information.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+[MovieBox Live Demo](https://hasan-dev-moviebox.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Features
+- 📺 Browse trending movies and TV shows
+- 🎭 Filter by genres
+- 🔎 Search functionality
+- 🌟 Display detailed movie & show information
+- ⚡ Built with React + Vite for a fast user experience
+
+## 🛠️ Tech Stack
+- **Frontend:** React, Vite, SASS CSS
+- **API:** Trakt API
+- **State Management:** React Context API
