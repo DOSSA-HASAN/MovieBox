@@ -74,8 +74,8 @@ function Hero() {
                     }
                 </main>
             </section >
-            <Suggestion data={fetchedShowsWithGenres} />
-            <Suggestion data={fetchedMoviesWithGenres} />
+            <Suggestion data={fetchedShowsWithGenres} type={"show"}/>
+            <Suggestion data={fetchedMoviesWithGenres} type={"movie"}/>
             <Footer />
 
         </>

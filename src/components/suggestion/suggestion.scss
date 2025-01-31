@@ -2,7 +2,6 @@
     width: 100%;
     height: 100%;
     color: #000;
-    // border: 1px solid;
     margin: 50px 0;
 
     .suggestion-cont {
@@ -37,9 +36,14 @@
             margin-top: 30px;
 
             &::-webkit-scrollbar {
-                background-color: gray;
+                background-color: #9CA3AF;
                 border-radius: 10px;
-                height: 5px;
+                width: 5px;
+            }
+
+            &::-webkit-scrollbar-thumb{
+                border-radius: 10px;
+                background-color: #BE123C;
             }
 
             .suggested-movie {
@@ -94,6 +98,14 @@
             }
         }
 
+        .show-more{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-rows: auto;
+            height: 500px;
+            overflow-y: scroll;
+        }
+
         .left-btn, .right-btn{
             background-color: transparent;
             font-size: 50px;
@@ -112,5 +124,10 @@
         .right-btn{
             right: 10px;
         }
+
+        .display-none{
+            display: none;
+        }
+
     }
 }

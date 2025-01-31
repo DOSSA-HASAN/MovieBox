@@ -260,7 +260,7 @@ function MovieContext({ children }) {
 
 
     return (
-        <mContext.Provider value={{ movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected, movies, fetchedMoviesWithGenres, fetchedShowsWithGenres }}>
+        <mContext.Provider value={{ movieMappingGenres, tvMappingGenres, movieGenres, setMovieGenres, tvGenres, setTvGenres, selectedMovieGenres, setSelectedMovieGenres, selectedTvGenres, setSelectedTvGenres, handleAddMovieGenre, handleAddTvGenre, hasSelected, setHasSelected, movies, fetchedMoviesWithGenres, fetchMoviesWithGenres, fetchedShowsWithGenres, fetchShowsWithGenres }}>
             {children}
         </mContext.Provider>
     )
