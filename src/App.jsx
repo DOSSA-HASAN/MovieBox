@@ -26,14 +26,13 @@ function App() {
 
 function InnerComponent() {
 
-  const { setHasSelected, hasSelected, fetchedMoviesWithGenres } = useContext(mContext)
+  const  { hasSelected } = useContext(mContext)
 
   return (
     <>
       {
-        // !hasSelected ? <Genre /> : <Hero />
+        hasSelected ?  <Hero /> : <Genre />
       }
-      <Hero />
     </>
   )
 }

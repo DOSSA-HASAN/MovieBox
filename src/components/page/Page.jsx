@@ -1,33 +1,37 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { mContext } from '../../MovieContext'
 import { Link } from 'react-router-dom'
 import "./page.scss"
+import Navbar from '../navbar/Navbar'
 
 function Page() {
 
     const { fetchedMoviesWithGenres, fetchedShowsWithGenres } = useContext(mContext)
     const itemType = window.location.pathname.split('/')[1]
     const id = useParams();
-    const [showItem, setShowItem] = useState([])
-    const [movieItem, setMovieItem] = useState([])
+    const [showItem, setShowItem] = useState()
+    const [movieItem, setMovieItem] = useState()
     const [isLoading, setIsLoading] = useState(true)
+    const navigateHome = useNavigate();
 
     const SearchForItem = () => {
-        if (itemType == "show") {
-            const show = fetchedShowsWithGenres.filter(show => {
-                return show.show.ids.trakt == id.id
-            })
-            setShowItem(show)
-            setIsLoading(false)
-            console.log(showItem)
-        } else {
-            const movie = fetchedMoviesWithGenres.filter(movie => {
-                return movie.movie.ids.trakt == id.id
-            })
-            setMovieItem(movie)
-            setIsLoading(false)
-            console.log(movieItem)
+        if (fetchedMoviesWithGenres.length === 0 || fetchedShowsWithGenres.length === 0) {
+            navigateHome("/")
+        } else{
+            if (itemType == "show") {
+                const show = fetchedShowsWithGenres.filter(show => (
+                    show.show.ids.trakt == id.id
+                ))
+                setShowItem(show)
+                setIsLoading(false)
+            } else {
+                const movie = fetchedMoviesWithGenres.filter(movie => (
+                    movie.movie.ids.trakt == id.id
+                ))
+                setMovieItem(movie)
+                setIsLoading(false)
+            }
         }
 
     }
@@ -38,6 +42,7 @@ function Page() {
 
     return (
         <section className='item-page-section'>
+            <Navbar />
             {
                 isLoading ? <p>Loading...</p> :
 
@@ -47,7 +52,7 @@ function Page() {
                                         ${movieItem[0]?.movie?.images?.clearart?.[0] ?
                                     `https://${movieItem[0]?.movie?.images.clearart[0]}` :
                                     `https://${movieItem[0]?.movie?.images.thumb[0]}` ?
-                                        `https://${movieItem[0]?.movie?.images.thum[0]}` :
+                                        `https://${movieItem[0]?.movie?.images.thumb[0]}` :
                                         "/default.jpeg"
                                 })`
                         }}>
@@ -69,7 +74,32 @@ function Page() {
                             <div className="overlay"></div>
                         </figure>
                         :
-                        <p>shows</p>
+                        showItem.length !== 0 &&
+                        <figure className='poster' style={{
+                            backgroundImage: `url(
+                                        ${showItem[0]?.show.images.clearart[0] ?
+                                    `https://${showItem[0].show.images.clearart[0]}` :
+                                    `https://${showItem[0].show.images.thumb[0]}` ?
+                                        `https://${showItem[0].show.images.thumb[0]}` :
+                                        "/default.jpeg"
+                                })`
+                        }}>
+                            <div className='movie-info'>
+                                <h1>{showItem[0].show?.title ? showItem[0].show.title : ""}</h1>
+                                <span className="rating-cont">
+                                    <img src="/imdb.png" alt="" />
+                                    <p>{showItem[0]?.show?.rating ? `${showItem[0].show.rating.toFixed(1)}` : "na"}</p>
+                                </span>
+                                <p>{showItem[0]?.show?.overview}</p>
+                                <Link className='trailer-link' to={showItem[0]?.show?.trailer ? `${showItem[0].show.trailer}` : ""} target='_blank'>
+                                    <button className='trailer-btn'>
+                                        <img src="/trailer.png" alt="" />
+                                        Watch trailer
+                                    </button>
+                                </Link>
+                            </div>
+                            <div className="overlay"></div>
+                        </figure>
             }
         </section>
     )

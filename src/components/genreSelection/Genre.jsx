@@ -15,7 +15,7 @@ function Genre() {
                 confirmButtonText: "Okay"
             })
         } else{
-            setHasSelected(!hasSelected)
+            setHasSelected(true)
         }
     }
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { mContext } from '../../movieContext'
+import { mContext } from '../../MovieContext'
 import "./suggestion.scss"
 import { Link } from 'react-router-dom'
 
@@ -37,7 +37,7 @@ function Suggestion({ data, type }) {
             //scrollHeight = total scrollable height
             const { scrollTop, scrollHeight, clientHeight } = element
 
-            if (scrollTop + clientHeight > scrollHeight - 1) {
+            if (scrollTop + clientHeight >= scrollHeight - 1) {
                 if (type == "movie") {
                     fetchMoviesWithGenres()
                 }
@@ -68,12 +68,14 @@ function Suggestion({ data, type }) {
                                             <img src={show?.show?.images?.poster?.[0] ? `https://${show.show.images.poster[0]}` : "/fallback-image.jpg"} alt="Show Poster" />
                                             <p className='country-released'>{show?.show?.country?.toUpperCase()} {show?.show?.year}</p>
                                             <p className='title'>{show?.show?.title}</p>
+                                            <p className='network'>Produced By {show?.show?.network}</p>
+                                            <p className='episode-count'>Episodes {show?.show?.aired_episodes}</p>
                                             <span className="rating">
                                                 <img src="/imdb.png" alt="IMDb Rating" />
                                                 <p>{show?.show?.rating ? show.show.rating.toFixed(1) : "N/A"}</p>
                                             </span>
                                             <div className='genres-list'>
-                                                <p>{show?.show?.show?.toString() || "Unknown Genre"}</p>
+                                                <p>{show?.show?.genres?.toString() || "Unknown Genre"}</p>
                                             </div>
                                         </div>
                                     </Link>

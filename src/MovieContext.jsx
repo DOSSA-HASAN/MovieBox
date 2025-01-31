@@ -186,7 +186,7 @@ function MovieContext({ children }) {
     const [fetchedMoviesWithGenres, setFetchedMoviesWithGenres] = useState([])
 
     const genreParamsMovie = new URLSearchParams({
-        genres: "action",
+        genres: selectedMovieGenres.map(movie => movie.name.toLowerCase()).join(','),
         extended: "full,images",
         page: pageM,
         limit: 20
@@ -196,7 +196,7 @@ function MovieContext({ children }) {
 
         if (selectedMovieGenres) {
             const response = await fetch(
-                `https://api.trakt.tv/movies/trending?&${genreParamsMovie}`,
+                `https://api.trakt.tv/movies/trending?&${genreParamsMovie.toString()}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -221,7 +221,7 @@ function MovieContext({ children }) {
     const [pageS, setPageS] = useState(1)
 
     const genreParamsShows = new URLSearchParams({
-        genres: "action",
+        genres: selectedTvGenres.map(movie => movie.name.toLowerCase()).join(','),
         extended: "full,images",
         page: pageS,
         limit: 20
@@ -229,9 +229,9 @@ function MovieContext({ children }) {
 
     const fetchShowsWithGenres = async () => {
 
-        if (selectedMovieGenres) {
+        if (selectedTvGenres) {
             const response = await fetch(
-                `https://api.trakt.tv/shows/trending?&${genreParamsShows}`,
+                `https://api.trakt.tv/shows/trending?&${genreParamsShows.toString()}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -253,10 +253,19 @@ function MovieContext({ children }) {
     // called on startup of application
     useEffect(() => {
         fetchTrendingMovies();
-        fetchMoviesWithGenres()
-        fetchShowsWithGenres()
     }, [])
 
+    useEffect(() => {
+        if(selectedTvGenres.length !== 0){
+            fetchShowsWithGenres()
+        }
+    }, [hasSelected])
+
+    useEffect(() => {
+        if(selectedMovieGenres.length !== 0){
+            fetchMoviesWithGenres()
+        }
+    }, [hasSelected])
 
 
     return (
